@@ -25,7 +25,6 @@ Como instalar as bibliotecas utilizadas:
     	Mac OSX:
 	
     		Se não tiver o Homebrew instalado, instale-o seguindo as instruções disponíveis no link https://brew.sh/
-	
     		Abra o terminal e digite:
     			brew install sdl2 sdl2_gfx sdl2_image 
                 sdl2_mixer sdl2_net sdl2_ttf
