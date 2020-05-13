@@ -17,9 +17,7 @@ Descrição:
 Como instalar as bibliotecas utilizadas:
 	
     Pygame:
-	
     	linux ou windows:
-	
     		no terminal Anaconda Prompt (se estiver utilizando o distribuidor Anaconda), digite "pip install pygame" (sem as aspas) e aperte a tecla "enter".
 	
     	Mac OSX:
