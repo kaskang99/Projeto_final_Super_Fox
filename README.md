@@ -11,6 +11,7 @@ Objetivo:
 	O tema do jogo é livre, contudo, a proposta deve ser previamente discutida com o professor.
 
 Descrição:
+
 Como instalar as bibliotecas utilizadas:
 	Pygame:
 		linux ou windows:
