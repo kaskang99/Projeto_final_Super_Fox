@@ -27,24 +27,14 @@ Como instalar as bibliotecas utilizadas:
     		Se não tiver o Homebrew instalado, instale-o seguindo as instruções disponíveis no link https://brew.sh/
 	
     		Abra o terminal e digite:
-	
     			brew install sdl2 sdl2_gfx sdl2_image 
-                
                 sdl2_mixer sdl2_net sdl2_ttf
-				
                 brew install Caskroom/cask/xquartz
-				
                 git clone -b 1.9.6 --single-branch https://
-                
                 github.com/pygame/pygame.git
-				
                 cd pygame
-				
                 python setup.py -config -auto -sdl2
-				
                 python setup.py install
-				
                 cd ..
-				
                 rm -rf pygame
 	
