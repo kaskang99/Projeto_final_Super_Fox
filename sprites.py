@@ -10,8 +10,8 @@ class Player(pg.sprite.Sprite):
         self.image = pg.Surface((TILESIZE, TILESIZE))
         self.image.fill(RED)
         self.rect = self.image.get_rect()
-        self.rect.center = (WIDTH/2, HEIGHT/2)
-        self.pos = vec(WIDTH/2, HEIGHT/2)
+        self.rect.center = (WIDTH/2, 600)
+        self.pos = vec(WIDTH/5, HEIGHT/2)
         self.vel = vec(0,0)
         self.acc = vec(0,0)
 
@@ -21,8 +21,7 @@ class Player(pg.sprite.Sprite):
         hits = pg.sprite.spritecollide(self, self.game.platforms, False)
         self.rect.x -= 1 #retirei o pixel de verificação
         if hits:
-            self.vel.y = -20
-
+            self.vel.y = -PLAYER_JUMP
 
     def update(self):
         self.acc = vec(0,PLAYER_GRAVITY)
@@ -31,8 +30,6 @@ class Player(pg.sprite.Sprite):
             self.acc.x = -PLAYER_ACC
         if keys[pg.K_RIGHT]:
             self.acc.x = PLAYER_ACC
-        #if keys[pg.K_SPACE]:
-         #   self.acc.y = 
         
         # implementacao do atrito
         self.acc.x += self.vel.x * PLAYER_FRICTION
