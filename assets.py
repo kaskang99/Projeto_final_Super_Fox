@@ -1,6 +1,6 @@
 import pygame
-import os
-import config
+from os import path
+from config import *
 
 #---IMAGENS DO JOGO---
 img_dir = path.join(path.dirname(__file__), 'img')

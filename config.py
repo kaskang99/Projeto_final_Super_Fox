@@ -4,6 +4,7 @@ HEIGHT = 768
 FPS = 60
 TITLE = 'SUPER FOX'
 FONT = 'arial'
+SPRITESHEET = 'spritesheet_jumper.png'
 # player properties
 PLAYER_ACC = 0.5
 PLAYER_FRICTION = -0.12
@@ -11,10 +12,11 @@ PLAYER_GRAVITY = 1
 PLAYER_JUMP = 20
 
 #iniciar plataformas
-PLATFORM_LIST = [(0, HEIGHT -40, WIDTH/2, 40), 
-    (WIDTH/2 - 50, HEIGHT * 3/4, 100, 20), 
-    (125, HEIGHT-350, 100, 20),
-    (WIDTH/3, HEIGHT*1/2, 50, 20)]
+PLATFORM_LIST = [(0, HEIGHT -40), 
+    (WIDTH/2 - 50, HEIGHT * 3/4 - 50), 
+    (125, HEIGHT-350),
+    (WIDTH/3, HEIGHT*1/2),
+    (350, 200)]
 
 # colors
 WHITE = (255,255,255)
