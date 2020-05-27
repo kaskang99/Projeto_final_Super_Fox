@@ -12,11 +12,11 @@ PLAYER_GRAVITY = 1
 PLAYER_JUMP = 20
 
 #iniciar plataformas
-PLATFORM_LIST = [(0, HEIGHT -40), 
-    (WIDTH/2 - 50, HEIGHT * 3/4 - 50), 
-    (125, HEIGHT-350),
-    (WIDTH/3, HEIGHT*1/2),
-    (350, 200)]
+PLATFORM_LIST = [(0, HEIGHT -40, WIDTH, 40), 
+                (WIDTH/2 - 50, HEIGHT * 3/4 - 50, 100, 20), 
+                (125, HEIGHT-350, 100, 20),
+                (WIDTH/3, HEIGHT*1/2, 100, 20),
+                (350, 200, 50, 20)]
 
 # colors
 WHITE = (255,255,255)

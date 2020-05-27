@@ -23,7 +23,7 @@ class Game:
 
     def load_data(self):
         self.dir = path.dirname(__file__)
-        img_dir = path.join(self.dir, 'assets')
+        img_dir = path.join(self.dir, 'SpriteSheets')
 
         #load spritesheet image
         self.spritesheet = Spritesheet(path.join(img_dir, SPRITESHEET))    
@@ -35,7 +35,7 @@ class Game:
         self.player = Player(self) #da uma referencia para o jogo (um link para o jogo, mostra todas as variáveis do jogo e.g.: plataforma)
         self.all_sprites.add(self.player)
         for plat in PLATFORM_LIST:
-            p = Platform(self,*plat)
+            p = Platform(*plat)
             self.all_sprites.add(p)
             self.platforms.add(p)
         self.run()
