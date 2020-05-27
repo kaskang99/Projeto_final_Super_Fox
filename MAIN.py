@@ -22,28 +22,22 @@ class Game:
         self.load_data()
 
     def load_data(self):
-        # load hi-score
-        self.dir = path.dirname(__file__)
-        with open(path.join(self.dir, 'HS_FILE'), 'w') as f:
-            try:
-                self.highscore = int(f.read())
-            except:
-                self.highscore = 0
         self.dir = path.dirname(__file__)
         img_dir = path.join(self.dir, 'SpriteSheets')
 
         #load spritesheet image
-        self.spritesheet = Spritesheet(path.join(img_dir, SPRITESHEET))    
-         
+        self.fox_sprite = Spritesheet(path.join(img_dir, FOX_SPRITESHEET))  
+        self.spritesheet = Spritesheet(path.join(img_dir, SPRITESHEET))  
+        #self.spritesheet = Spritesheet(path.join(img_dir, SPRITESHEET)))
+
     def new(self):
         # start a new game
-        self.score = 0
         self.all_sprites = pg.sprite.Group()
         self.platforms = pg.sprite.Group()
         self.player = Player(self) #da uma referencia para o jogo (um link para o jogo, mostra todas as variáveis do jogo e.g.: plataforma)
         self.all_sprites.add(self.player)
         for plat in PLATFORM_LIST:
-            p = Platform(*plat)
+            p = Platform(self, *plat)
             self.all_sprites.add(p)
             self.platforms.add(p)
         self.run()
@@ -78,6 +72,8 @@ class Game:
         #jogador "cai" em um buraco e morre
         if self.player.rect.bottom > HEIGHT:
             self.playing = False
+            self.running = False
+
     def events(self):
         # Game loop - events
         for event in pg.event.get():
@@ -101,7 +97,7 @@ class Game:
         self.window.fill(TEAL)
         self.draw_grid()
         self.all_sprites.draw(self.window)
-        self.draw_text(str(self.score), 22, WHITE, WIDTH/2, 15)
+
         # after drawing everything, flip the display
         pg.display.flip()
 
@@ -111,7 +107,6 @@ class Game:
         self.draw_text(TITLE, 48, BLACK, WIDTH/2, HEIGHT/4)
         self.draw_text("arrows to move, space to jump", 22, BLACK, WIDTH/2, HEIGHT/2)
         self.draw_text("aperte qualquer tecla para começar", 22, BLACK, WIDTH/2, 3*HEIGHT/4)
-        self.draw_text("Recorde: " +str(self.highscore), 22, YELLOW, WIDTH/2, 15)
         pg.display.flip()
         self.wait_for_key()
 
@@ -121,15 +116,7 @@ class Game:
             return
         self.window.fill(TEAL)
         self.draw_text("GAME OVER", 48, BLACK, WIDTH/2, HEIGHT/2)
-        self.draw_text("Pontuação: " +str(self.score), 22, WHITE, WIDTH/2, HEIGHT/5)
-        self.draw_text("Aperte qualquer tecla para jogar novamente", 22, BLACK, WIDTH/2, 3*HEIGHT/4)
-        if self.score > self.highscore:
-            self.highscore = self.score
-            self.draw_text("Parabéns! Você alcançou uma nova pontuação máxima!", 22, WHITE, WIDTH/2, HEIGHT/5 - 40)
-            with open(path.join(self.dir, 'HS_FILE'), 'w') as f:
-                f.write(str(self.score))
-        else:
-            self.draw_text("Recorde: " +str(self.highscore), 22, YELLOW, WIDTH/2, HEIGHT/6 - 40)
+        self.draw_text("aperte qualquer tecla para jogar novamente", 22, BLACK, WIDTH/2, 3*HEIGHT/4)
         pg.display.flip()
         self.wait_for_key()
 
