@@ -7,8 +7,8 @@ class Player(pg.sprite.Sprite):
     def __init__(self, game): #no arquivo MAIN.py - self.player = Player(self) - o init precisa de mais de 1 argumento, já que não é mais Player() e sim Player(self)
         pg.sprite.Sprite.__init__(self)
         self.game = game #Agora a classe Player tem como referência o jogo.
-        self.image = pg.Surface((TILESIZE, TILESIZE))
-        self.image.fill(RED)
+        self.image = self.game.fox_sprite.get_image(56, 4, 46, 35).convert()
+        #self.image.set_colorkey(SPRITE_BG)
         self.rect = self.image.get_rect()
         self.rect.center = (WIDTH/2, 600)
         self.pos = vec(WIDTH/5, HEIGHT/2)
