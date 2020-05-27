@@ -27,7 +27,7 @@ class Game:
 
         #load spritesheet image
         self.fox_sprite = Spritesheet(path.join(img_dir, FOX_SPRITE))    
-         
+        
     def new(self):
         # start a new game
         self.all_sprites = pg.sprite.Group()
