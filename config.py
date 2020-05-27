@@ -5,7 +5,7 @@ FPS = 60
 TITLE = 'SUPER FOX'
 FONT = 'arial'
 SPRITESHEET = 'spritesheet_jumper.png'
-FOX_SPRITESHEET = 'fox_spritesheet.png'
+HS_FILE = "highscore.txt"
 # player properties
 PLAYER_ACC = 0.5
 PLAYER_FRICTION = -0.12
@@ -24,10 +24,10 @@ WHITE = (255,255,255)
 BLACK = (0, 0, 0)
 RED = (255, 0, 0)
 GREEN = (0, 255, 0)
-SPRITE_BG = (0, 50.2, 0)
 BLUE = (0, 0, 255)
-TEAL = (0, 128, 129)
+TEAL = (100, 240, 255)
 LIGHTGREY = (100, 100, 100)
+YELLOW = (255, 255, 0)
 
 TILESIZE = 32
 GRIDWIDTH = WIDTH / TILESIZE
