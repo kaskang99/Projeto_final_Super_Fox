@@ -18,7 +18,7 @@ PLATFORM_LIST = [(0, HEIGHT -40, WIDTH, 40),
                 (WIDTH/3, HEIGHT*1/2, 100, 20),
                 (350, 200, 50, 20)]
 
-# colors
+# cores
 WHITE = (255,255,255)
 BLACK = (0, 0, 0)
 RED = (255, 0, 0)
