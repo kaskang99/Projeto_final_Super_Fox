@@ -53,3 +53,13 @@ class Platform(pg.sprite.Sprite):
         self.rect.x = x
         self.rect.y = y
 
+class Spritesheet:
+    #utility class for loading and parsing spritesheets
+    def __init__(self, filename):
+        self.spritesheet = pg.image.load(filename).convert()
+
+    def get_image(self, x, y, w, h):
+        # grab an image out of a larger spritesheet
+        image = pg.Surface((w,h))
+        image.blit(self.spritesheet, (0, 0), (x, y, w, h))
+        return image

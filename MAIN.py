@@ -4,6 +4,9 @@ import pygame as pg
 import os
 from config import *
 from sprites import *
+from assets import *
+from game_screen import *
+from os import path
 
 class Game:
     def __init__(self):
@@ -15,7 +18,15 @@ class Game:
         pg.display.set_caption(TITLE)
         self.clock = pg.time.Clock()
         self.running = True
-        self.font_name = pg.font.match_font(FONT)        
+        self.font_name = pg.font.match_font(FONT)    
+        self.load_data()
+
+    def load_data(self):
+        self.dir = path.dirname(__file__)
+        img_dir = path.join(self.dir, 'SpriteSheets')
+
+        #load spritesheet image
+        self.spritesheet = Spritesheet(path.join(img_dir, SPRITESHEET))    
         
     def new(self):
         # start a new game
