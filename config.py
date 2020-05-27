@@ -5,6 +5,7 @@ FPS = 60
 TITLE = 'SUPER FOX'
 FONT = 'arial'
 SPRITESHEET = 'spritesheet_jumper.png'
+FOX_SPRITE = 'fox_spritesheet.png'
 HS_FILE = "highscore.txt"
 # player properties
 PLAYER_ACC = 0.5
