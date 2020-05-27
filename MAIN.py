@@ -26,7 +26,8 @@ class Game:
         img_dir = path.join(self.dir, 'SpriteSheets')
 
         #load spritesheet image
-        self.fox_sprite = Spritesheet(path.join(img_dir, FOX_SPRITESHEET))    
+        self.fox_sprite = Spritesheet(path.join(img_dir, FOX_SPRITESHEET))  
+        self.spritesheet = Spritesheet(path.join(img_dir, SPRITESHEET))  
         #self.spritesheet = Spritesheet(path.join(img_dir, SPRITESHEET)))
 
     def new(self):
@@ -36,7 +37,7 @@ class Game:
         self.player = Player(self) #da uma referencia para o jogo (um link para o jogo, mostra todas as variáveis do jogo e.g.: plataforma)
         self.all_sprites.add(self.player)
         for plat in PLATFORM_LIST:
-            p = Platform(*plat)
+            p = Platform(self, *plat)
             self.all_sprites.add(p)
             self.platforms.add(p)
         self.run()
