@@ -64,4 +64,5 @@ class Spritesheet:
         # grab an image out of a larger spritesheet
         image = pg.Surface((w,h))
         image.blit(self.spritesheet, (0, 0), (x, y, w, h))
+        image = pg.transform.scale(image, (w//2, h//2)) #resize image
         return image
