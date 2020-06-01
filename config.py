@@ -14,9 +14,9 @@ PLAYER_GRAVITY = 1
 PLAYER_JUMP = 20
 
 #iniciar plataformas
-PLATFORM_LIST = [(0, HEIGHT -40), 
-                (WIDTH/2 - 50, HEIGHT * 3/4 - 50), 
-                (125, HEIGHT-350),
+PLATFORM_LIST = [(0, HEIGHT -60), 
+                (310, HEIGHT -60), 
+                (850, HEIGHT -60),
                 (WIDTH/3, HEIGHT*1/2),
                 (350, 200)]
 
