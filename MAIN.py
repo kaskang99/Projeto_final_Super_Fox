@@ -56,7 +56,7 @@ class Game:
             self.events()
             self.update()
             self.draw()
-    
+
     def update(self):
         # Game update
         self.all_sprites.update()
@@ -66,12 +66,12 @@ class Game:
             if hits:
                 self.player.pos.y = hits[0].rect.top
                 self.player.vel.y = 0
-        #quando o jogador alcançar a metade da tela 
+        #quando o jogador alcançar o terço da tela 
         if self.player.rect.right > WIDTH / 3:
             self.player.pos.x -= max(abs(self.player.vel.x),2)
             for plat in self.platforms:
-                plat.rect.right -= max(abs(self.player.vel.x),2)
-        if self.player.rect.left < WIDTH / 3:
+                plat.rect.left -= max(abs(self.player.vel.x),2)
+        elif self.player.rect.left < WIDTH / 4:
             self.player.pos.x += max(abs(self.player.vel.x),2)
             for plat in self.platforms:
                 plat.rect.left += max(abs(self.player.vel.x),2)
