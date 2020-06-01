@@ -33,7 +33,8 @@ class Game:
                 self.highscore = 0
         #load spritesheet image
         self.fox_sprite = Spritesheet(path.join(img_dir, FOX_SPRITE))    
-        
+        self.spritesheet = Spritesheet(path.join(img_dir, SPRITESHEET))
+
     def new(self):
         # start a new game
         self.score = 0
