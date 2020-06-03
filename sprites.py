@@ -7,8 +7,12 @@ class Player(pg.sprite.Sprite):
     def __init__(self, game): #no arquivo MAIN.py - self.player = Player(self) - o init precisa de mais de 1 argumento, já que não é mais Player() e sim Player(self)
         pg.sprite.Sprite.__init__(self)
         self.game = game #Agora a classe Player tem como referência o jogo.
+        self.walking = False
+        self.jumping = False
+        self.last_update = 0
+        self.current_frame = 0
         self.image = self.game.fox_sprite.get_image(56, 4, 46, 35).convert()
-        #self.image.set_colorkey(SPRITE_BG)
+        self.image.set_colorkey(PLAYER_GREEN)
         self.rect = self.image.get_rect()
         self.rect.center = (WIDTH/2, 600)
         self.pos = vec(WIDTH/5, HEIGHT/2)
@@ -64,5 +68,5 @@ class Spritesheet:
         # grab an image out of a larger spritesheet
         image = pg.Surface((w,h))
         image.blit(self.spritesheet, (0, 0), (x, y, w, h))
-        image = pg.transform.scale(image, (w//2, h//2)) #resize image
+        image = pg.transform.scale(image, ((3*w)//4, (3*h)//4)) #resize image
         return image
