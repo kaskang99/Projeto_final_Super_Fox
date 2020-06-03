@@ -26,7 +26,10 @@ PLATFORM_LIST = [(0, HEIGHT -60),
                 (2900, HEIGHT -60),
                 (3300, HEIGHT -60),
                 (3650, HEIGHT -240),
-                (4000, HEIGHT -410),]
+                (4000, HEIGHT -410),
+                (4500, HEIGHT -60),
+                (4750, HEIGHT -60),
+                (4950, HEIGHT -60),]
 
 # cores
 WHITE = (255,255,255)

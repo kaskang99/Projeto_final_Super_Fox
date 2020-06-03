@@ -122,7 +122,7 @@ class Game:
         self.window.fill(TEAL)
         self.draw_text(TITLE, 48, BLACK, WIDTH/2, HEIGHT/4)
         self.draw_text("arrows to move, space to jump", 22, BLACK, WIDTH/2, HEIGHT/2)
-        self.draw_text("aperte qualquer tecla para começar", 22, BLACK, WIDTH/2, 3*HEIGHT/4)
+        self.draw_text("Aperte qualquer tecla para começar", 22, BLACK, WIDTH/2, 3*HEIGHT/4)
         self.draw_text("Recorde: " +str(self.highscore), 22, YELLOW, WIDTH/2, 15)
         pg.display.flip()
         self.wait_for_key()
@@ -143,7 +143,7 @@ class Game:
                 f.write(str(self.score))
         else:
             self.draw_text("Recorde: " +str(self.highscore), 22, YELLOW, WIDTH/2, HEIGHT/6 - 40)
-        self.draw_text("aperte qualquer tecla para jogar novamente", 22, BLACK, WIDTH/2, 3*HEIGHT/4)
+        self.draw_text("Aperte qualquer tecla para jogar novamente", 22, BLACK, WIDTH/2, 3*HEIGHT/4)
         pg.display.flip()
         self.wait_for_key()
 
