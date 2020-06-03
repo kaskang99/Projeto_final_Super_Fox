@@ -56,6 +56,7 @@ class Game:
         # Game loop
         pg.mixer.music.load(path.join(self.snd_dir, 'game_music_theme.ogg'))
         pg.mixer.music.play(loops=-1)
+        pg.mixer.music.set_volume(0.25)
         self.playing = True
         while self.playing:
             self.clock.tick(FPS)
@@ -86,6 +87,7 @@ class Game:
         if self.player.rect.bottom > HEIGHT:
             self.playing = False
             self.gameover_sound.play()
+            self.gameover_sound.set_volume(.2)
 
     def events(self):
         # Game loop - events
@@ -100,16 +102,9 @@ class Game:
                     self.player.jump()
                     self.jump_sound.play()
 
-    def draw_grid(self):
-        for x in range(0, WIDTH, TILESIZE):
-            pg.draw.line(self.window, LIGHTGREY, (x,0), (x,HEIGHT))
-        for y in range(0, HEIGHT, TILESIZE):
-            pg.draw.line(self.window, LIGHTGREY, (0,y), (WIDTH,y))
-
     def draw(self):
         # Game loop - draw
-        self.window.fill(TEAL)
-        self.draw_grid()
+        self.window.fill(SKYBLUE)
         self.all_sprites.draw(self.window)
         self.draw_text(str(self.score), 22, WHITE, WIDTH/2, 15)
         # after drawing everything, flip the display
@@ -119,7 +114,8 @@ class Game:
         # game start screen
         pg.mixer.music.load(path.join(self.snd_dir, 'main_menu_music.ogg'))
         pg.mixer.music.play(loops=-1)
-        self.window.fill(TEAL)
+        self.window.fill(SKYBLUE)
+        pg.mixer.music.set_volume(0.25)
         self.draw_text(TITLE, 48, BLACK, WIDTH/2, HEIGHT/4)
         self.draw_text("arrows to move, space to jump", 22, BLACK, WIDTH/2, HEIGHT/2)
         self.draw_text("Aperte qualquer tecla para começar", 22, BLACK, WIDTH/2, 3*HEIGHT/4)
