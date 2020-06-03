@@ -34,6 +34,10 @@ class Game:
         #load spritesheet image
         self.fox_sprite = Spritesheet(path.join(img_dir, FOX_SPRITE))    
         self.spritesheet = Spritesheet(path.join(img_dir, SPRITESHEET))
+        #load sounds
+        self.snd_dir = path.join(self.dir, 'snd')
+        self.jump_sound = pg.mixer.Sound(path.join(self.snd_dir, 'fox_jump.wav'))
+        self.gameover_sound = pg.mixer.Sound(path.join(self.snd_dir, 'game_over.wav'))
 
     def new(self):
         # start a new game
@@ -50,12 +54,15 @@ class Game:
 
     def run(self):
         # Game loop
+        pg.mixer.music.load(path.join(self.snd_dir, 'game_music_theme.ogg'))
+        pg.mixer.music.play(loops=-1)
         self.playing = True
         while self.playing:
             self.clock.tick(FPS)
             self.events()
             self.update()
             self.draw()
+        pg.mixer.music.fadeout(500)
 
     def update(self):
         # Game update
@@ -78,6 +85,7 @@ class Game:
         #jogador "cai" em um buraco e morre
         if self.player.rect.bottom > HEIGHT:
             self.playing = False
+            self.gameover_sound.play()
 
     def events(self):
         # Game loop - events
@@ -90,6 +98,7 @@ class Game:
             if event.type == pg.KEYDOWN:
                 if event.key == pg.K_SPACE:
                     self.player.jump()
+                    self.jump_sound.play()
 
     def draw_grid(self):
         for x in range(0, WIDTH, TILESIZE):
@@ -108,6 +117,8 @@ class Game:
 
     def show_start_screen(self):
         # game start screen
+        pg.mixer.music.load(path.join(self.snd_dir, 'main_menu_music.ogg'))
+        pg.mixer.music.play(loops=-1)
         self.window.fill(TEAL)
         self.draw_text(TITLE, 48, BLACK, WIDTH/2, HEIGHT/4)
         self.draw_text("arrows to move, space to jump", 22, BLACK, WIDTH/2, HEIGHT/2)
@@ -115,6 +126,7 @@ class Game:
         self.draw_text("Recorde: " +str(self.highscore), 22, YELLOW, WIDTH/2, 15)
         pg.display.flip()
         self.wait_for_key()
+        pg.mixer.music.fadeout(750)
 
     def show_go_screen(self):
         # game end screen
