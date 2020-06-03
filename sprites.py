@@ -47,8 +47,6 @@ class Player(pg.sprite.Sprite):
         self.animate()
         self.acc = vec(0,PLAYER_GRAVITY)
         keys = pg.key.get_pressed()
-        if keys[pg.K_LEFT]:
-            self.acc.x = -PLAYER_ACC
         if keys[pg.K_RIGHT]:
             self.acc.x = PLAYER_ACC
         
