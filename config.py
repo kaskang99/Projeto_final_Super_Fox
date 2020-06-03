@@ -15,10 +15,18 @@ PLAYER_JUMP = 20
 
 #iniciar plataformas
 PLATFORM_LIST = [(0, HEIGHT -60), 
-                (310, HEIGHT -60), 
-                (850, HEIGHT -60),
-                (WIDTH/3, HEIGHT*1/2),
-                (350, 200)]
+                (250, HEIGHT -60), 
+                (500, HEIGHT -60),
+                (925, HEIGHT -60),
+                (1300, HEIGHT -60),
+                (1500, HEIGHT -60),
+                (1925, HEIGHT -60),
+                (2225, HEIGHT -240),
+                (2700, HEIGHT -60),
+                (2900, HEIGHT -60),
+                (3300, HEIGHT -60),
+                (3650, HEIGHT -240),
+                (4000, HEIGHT -410),]
 
 # cores
 WHITE = (255,255,255)

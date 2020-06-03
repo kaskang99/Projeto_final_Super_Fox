@@ -9,15 +9,31 @@ class Player(pg.sprite.Sprite):
         self.game = game #Agora a classe Player tem como referência o jogo.
         self.walking = False
         self.jumping = False
-        self.last_update = 0
         self.current_frame = 0
-        self.image = self.game.fox_sprite.get_image(56, 4, 46, 35).convert()
+        self.last_update = 0
+        self.load_images()
+        self.image = self.standing_frame[0]
         self.image.set_colorkey(PLAYER_GREEN)
         self.rect = self.image.get_rect()
         self.rect.center = (WIDTH/2, 600)
         self.pos = vec(WIDTH/5, HEIGHT/2)
         self.vel = vec(0,0)
         self.acc = vec(0,0)
+
+    def load_images(self):
+        self.standing_frame = [self.game.fox_sprite.get_image(56, 4, 46, 35)]
+        for frame in self.standing_frame:
+            frame.set_colorkey(PLAYER_GREEN)
+        self.walk_frame_r=[self.game.fox_sprite.get_image(0, 0, 45, 36),
+                            self.game.fox_sprite.get_image(114, 2, 46, 36)]
+        for frame in self.walk_frame_r:
+            frame.set_colorkey(PLAYER_GREEN)
+        self.walk_frame_l=[]
+        for frame in self.walk_frame_r:
+            frame.set_colorkey(PLAYER_GREEN)
+            self.walk_frame_l.append(pg.transform.flip(frame, True, False))
+        self.jump_frame = self.game.fox_sprite.get_image(229, 0, 38, 40)
+        self.jump_frame.set_colorkey(PLAYER_GREEN)
 
     def jump(self):
         #pular somente se estiver em uma plataforma ou estiver no chao
@@ -28,6 +44,7 @@ class Player(pg.sprite.Sprite):
             self.vel.y = -PLAYER_JUMP
 
     def update(self):
+        self.animate()
         self.acc = vec(0,PLAYER_GRAVITY)
         keys = pg.key.get_pressed()
         if keys[pg.K_LEFT]:
@@ -39,6 +56,8 @@ class Player(pg.sprite.Sprite):
         self.acc.x += self.vel.x * PLAYER_FRICTION
         #eq of motion
         self.vel += self.acc
+        if abs(self.vel.x) < 0.1:
+            self.vel.x = 0
         self.pos += self.vel + 0.5*self.acc
         # jogador sai pra fora da tela e volta do outro lado
         if self.pos.x > WIDTH:
@@ -47,6 +66,35 @@ class Player(pg.sprite.Sprite):
             self.pos.x = WIDTH
 
         self. rect.midbottom = self.pos
+
+    def animate(self):
+        now = pg.time.get_ticks()
+        if self.vel.x != 0:
+            self.walking=True
+        else:
+            self.walking = False
+        #animacao de andar
+        if self.walking:
+            if now - self.last_update>300:
+                self.last_update = now
+                self.current_frame = (self.current_frame + 1) % len(self.walk_frame_l)
+                bottom = self.rect.bottom
+                if self.vel.x>0:
+                    self.image = self.walk_frame_r[self.current_frame]
+                else:
+                    self.image = self.walk_frame_l[self.current_frame]
+                self.rect = self.image.get_rect()
+                self.rect.bottom = bottom
+        #animacao quando estiver parado
+        if not self.jumping and not self.walking:
+            if now - self.last_update > 200:
+                self.last_update = now
+                self.current_frame = (self.current_frame + 1) % len(self.standing_frame)
+                bottom = self.rect.bottom
+                self.image = self.standing_frame[self.current_frame]
+                self.rect = self.image.get_rect()
+                self.rect.bottom = bottom
+            
 
 class Platform(pg.sprite.Sprite):
     def __init__(self, game, x, y):
