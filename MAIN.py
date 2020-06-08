@@ -45,12 +45,17 @@ class Game:
         self.score = 0
         self.all_sprites = pg.sprite.Group()
         self.platforms = pg.sprite.Group()
+        self.mobes = pg.sprite.Group()
         self.player = Player(self) #da uma referencia para o jogo (um link para o jogo, mostra todas as variáveis do jogo e.g.: plataforma)
         self.all_sprites.add(self.player)
         for plat in PLATFORM_LIST:
             p = Platform(self, *plat)
             self.all_sprites.add(p)
             self.platforms.add(p)
+        for mobs in MOB_LIST:
+            m = Mob(self, *mobs)
+            self.all_sprites.add(m)
+            self.mobes.add(m)
         self.run()
 
     def run(self):
@@ -80,11 +85,15 @@ class Game:
             self.player.pos.x -= max(abs(self.player.vel.x),2)
             for plat in self.platforms:
                 plat.rect.left -= max(abs(self.player.vel.x),2)
-        '''elif self.player.rect.left < WIDTH / 4:
+            for mobs in self.mobes:
+                mobs.rect.left -= max(abs(self.player.vel.x),2)
+        """elif self.player.rect.left < WIDTH / 4:
             self.player.pos.x += max(abs(self.player.vel.x),2)
             for plat in self.platforms:
                 plat.rect.left += max(abs(self.player.vel.x),2)
-        '''
+            for mobs in self.mobes:
+                mobs.rect.left += max(abs(self.player.vel.x),2)
+        """
         #jogador "cai" em um buraco e morre
         if self.player.rect.bottom > HEIGHT:
             self.playing = False

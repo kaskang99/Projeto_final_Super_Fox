@@ -126,3 +126,13 @@ class Cloud:
     def get_image(self,x,y,w,h):
         cloud = pg.Surface((w,h))
         image.blit(self.sprite, ())
+
+class Mob(pg.sprite.Sprite):
+    def __init__(self, game, x, y):
+        pg.sprite.Sprite.__init__(self)
+        self.game = game
+        self.image = pg.Surface((30,40))
+        self.image.fill(RED)
+        self.rect = self.image.get_rect()
+        self.rect.x = x
+        self.rect.y = y 

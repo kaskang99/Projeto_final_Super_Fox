@@ -32,6 +32,9 @@ PLATFORM_LIST = [(0, HEIGHT -60),
                 (4750, HEIGHT -60),
                 (4950, HEIGHT -60),]
 
+MOB_LIST = [(250, HEIGHT -100),
+            (500, HEIGHT -100),]
+
 # cores
 WHITE = (255,255,255)
 BLACK = (0, 0, 0)
