@@ -116,3 +116,13 @@ class Spritesheet:
         image.blit(self.spritesheet, (0, 0), (x, y, w, h))
         image = pg.transform.scale(image, ((3*w)//4, (3*h)//4)) #resize image
         return image
+
+class Mob(pg.sprite.Sprite):
+    def __init__(self, game, x, y):
+        pg.sprite.Sprite.__init__(self)
+        self.game = game
+        self.image = pg.Surface((30,40))
+        self.image.fill(RED)
+        self.rect = self.image.get_rect()
+        self.rect.x = x
+        self.rect.y = y 
