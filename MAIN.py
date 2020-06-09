@@ -34,6 +34,7 @@ class Game:
         #load spritesheet image
         self.fox_sprite = Spritesheet(path.join(img_dir, FOX_SPRITE))    
         self.spritesheet = Spritesheet(path.join(img_dir, SPRITESHEET))
+        self.cloud = Spritesheet(path.join(img_dir, CLOUD_SPRITE))
         #load sounds
         self.snd_dir = path.join(self.dir, 'snd')
         self.jump_sound = pg.mixer.Sound(path.join(self.snd_dir, 'fox_jump.wav'))
@@ -86,12 +87,13 @@ class Game:
                 plat.rect.left -= max(abs(self.player.vel.x),2)
             for mobs in self.mobes:
                 mobs.rect.left -= max(abs(self.player.vel.x),2)
-        elif self.player.rect.left < WIDTH / 4:
+        """elif self.player.rect.left < WIDTH / 4:
             self.player.pos.x += max(abs(self.player.vel.x),2)
             for plat in self.platforms:
                 plat.rect.left += max(abs(self.player.vel.x),2)
             for mobs in self.mobes:
                 mobs.rect.left += max(abs(self.player.vel.x),2)
+        """
         #jogador "cai" em um buraco e morre
         if self.player.rect.bottom > HEIGHT:
             self.playing = False
