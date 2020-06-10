@@ -116,14 +116,13 @@ class Spritesheet:
         image.blit(self.spritesheet, (0, 0), (x, y, w, h))
         image = pg.transform.scale(image, ((3*w)//4, (3*h)//4)) #resize image
         return image
-
+        
 class Cloud:
     def __init__(self, game, x, y, filename):
         pg.sprite.Sprite.__init__
         self.sprite = pg.image.load(filename).convert()
-        self.
 
-    def get_image(self,x,y,w,h):
+    def get_image(self,x,y):
         cloud = pg.Surface((w,h))
         image.blit(self.sprite, ())
 
