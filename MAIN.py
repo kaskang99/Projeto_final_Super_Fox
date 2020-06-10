@@ -34,6 +34,7 @@ class Game:
         #load spritesheet image
         self.fox_sprite = Spritesheet(path.join(img_dir, FOX_SPRITE))    
         self.spritesheet = Spritesheet(path.join(img_dir, SPRITESHEET))
+        self.cloud = Spritesheet(path.join(img_dir, CLOUD_SPRITE))
         #load sounds
         self.snd_dir = path.join(self.dir, 'snd')
         self.jump_sound = pg.mixer.Sound(path.join(self.snd_dir, 'fox_jump.wav'))
@@ -44,12 +45,17 @@ class Game:
         self.score = 0
         self.all_sprites = pg.sprite.Group()
         self.platforms = pg.sprite.Group()
+        self.mobes = pg.sprite.Group()
         self.player = Player(self) #da uma referencia para o jogo (um link para o jogo, mostra todas as variáveis do jogo e.g.: plataforma)
         self.all_sprites.add(self.player)
         for plat in PLATFORM_LIST:
             p = Platform(self, *plat)
             self.all_sprites.add(p)
             self.platforms.add(p)
+        for mobs in MOB_LIST:
+            m = Mob(self, *mobs)
+            self.all_sprites.add(m)
+            self.mobes.add(m)
         self.run()
 
     def run(self):
@@ -79,10 +85,15 @@ class Game:
             self.player.pos.x -= max(abs(self.player.vel.x),2)
             for plat in self.platforms:
                 plat.rect.left -= max(abs(self.player.vel.x),2)
-        elif self.player.rect.left < WIDTH / 4:
+            for mobs in self.mobes:
+                mobs.rect.left -= max(abs(self.player.vel.x),2)
+        """elif self.player.rect.left < WIDTH / 4:
             self.player.pos.x += max(abs(self.player.vel.x),2)
             for plat in self.platforms:
                 plat.rect.left += max(abs(self.player.vel.x),2)
+            for mobs in self.mobes:
+                mobs.rect.left += max(abs(self.player.vel.x),2)
+        """
         #jogador "cai" em um buraco e morre
         if self.player.rect.bottom > HEIGHT:
             self.playing = False
@@ -102,16 +113,9 @@ class Game:
                     self.player.jump()
                     self.jump_sound.play()
 
-    def draw_grid(self):
-        for x in range(0, WIDTH, TILESIZE):
-            pg.draw.line(self.window, LIGHTGREY, (x,0), (x,HEIGHT))
-        for y in range(0, HEIGHT, TILESIZE):
-            pg.draw.line(self.window, LIGHTGREY, (0,y), (WIDTH,y))
-
     def draw(self):
         # Game loop - draw
-        self.window.fill(TEAL)
-        self.draw_grid()
+        self.window.fill(SKYBLUE)
         self.all_sprites.draw(self.window)
         self.draw_text(str(self.score), 22, WHITE, WIDTH/2, 15)
         # after drawing everything, flip the display
@@ -121,11 +125,11 @@ class Game:
         # game start screen
         pg.mixer.music.load(path.join(self.snd_dir, 'main_menu_music.ogg'))
         pg.mixer.music.play(loops=-1)
+        self.window.fill(SKYBLUE)
         pg.mixer.music.set_volume(0.25)
-        self.window.fill(TEAL)
         self.draw_text(TITLE, 48, BLACK, WIDTH/2, HEIGHT/4)
         self.draw_text("arrows to move, space to jump", 22, BLACK, WIDTH/2, HEIGHT/2)
-        self.draw_text("aperte qualquer tecla para começar", 22, BLACK, WIDTH/2, 3*HEIGHT/4)
+        self.draw_text("Aperte qualquer tecla para começar", 22, BLACK, WIDTH/2, 3*HEIGHT/4)
         self.draw_text("Recorde: " +str(self.highscore), 22, YELLOW, WIDTH/2, 15)
         pg.display.flip()
         self.wait_for_key()
@@ -146,7 +150,7 @@ class Game:
                 f.write(str(self.score))
         else:
             self.draw_text("Recorde: " +str(self.highscore), 22, YELLOW, WIDTH/2, HEIGHT/6 - 40)
-        self.draw_text("aperte qualquer tecla para jogar novamente", 22, BLACK, WIDTH/2, 3*HEIGHT/4)
+        self.draw_text("Aperte qualquer tecla para jogar novamente", 22, BLACK, WIDTH/2, 3*HEIGHT/4)
         pg.display.flip()
         self.wait_for_key()
 

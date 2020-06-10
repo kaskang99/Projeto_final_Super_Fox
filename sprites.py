@@ -47,8 +47,6 @@ class Player(pg.sprite.Sprite):
         self.animate()
         self.acc = vec(0,PLAYER_GRAVITY)
         keys = pg.key.get_pressed()
-        if keys[pg.K_LEFT]:
-            self.acc.x = -PLAYER_ACC
         if keys[pg.K_RIGHT]:
             self.acc.x = PLAYER_ACC
         
@@ -118,3 +116,22 @@ class Spritesheet:
         image.blit(self.spritesheet, (0, 0), (x, y, w, h))
         image = pg.transform.scale(image, ((3*w)//4, (3*h)//4)) #resize image
         return image
+        
+class Cloud:
+    def __init__(self, game, x, y, filename):
+        pg.sprite.Sprite.__init__
+        self.sprite = pg.image.load(filename).convert()
+
+    def get_image(self,x,y):
+        cloud = pg.Surface((w,h))
+        image.blit(self.sprite, ())
+
+class Mob(pg.sprite.Sprite):
+    def __init__(self, game, x, y):
+        pg.sprite.Sprite.__init__(self)
+        self.game = game
+        self.image = pg.Surface((30,40))
+        self.image.fill(RED)
+        self.rect = self.image.get_rect()
+        self.rect.x = x
+        self.rect.y = y 
