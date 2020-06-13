@@ -35,7 +35,9 @@ MOB_LIST = [(1400, HEIGHT -100),
             (1650, HEIGHT -100),
             (2350, HEIGHT -280),
             (3400, HEIGHT -100),
-            (4100, HEIGHT -450),]
+            (3700, HEIGHT -280),
+            (4100, HEIGHT -450),
+            (4550, HEIGHT -100)]
 
 
 

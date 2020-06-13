@@ -101,11 +101,13 @@ class Game:
             self.playing = False
             self.gameover_sound.play()
             self.gameover_sound.set_volume(.2)
+            pg.mixer.music.fadeout(750)
         hits_mob = pg.sprite.spritecollide(self.player, self.mobes, False)
         if hits_mob:
             self.playing = False
             self.gameover_sound.play()
             self.gameover_sound.set_volume(.2)
+            pg.mixer.music.fadeout(750)
 
     def events(self):
         # Game loop - events
@@ -151,6 +153,7 @@ class Game:
         self.draw_text("GAME OVER", 48, BLACK, WIDTH/2, HEIGHT/2)
         self.draw_text("Pontuação: " +str(self.score), 22, WHITE, WIDTH/2, HEIGHT/5)
         self.draw_text("Aperte qualquer tecla para jogar novamente", 22, BLACK, WIDTH/2, 3*HEIGHT/4)
+        '''
         if self.score > self.highscore:
             self.highscore = self.score
             self.draw_text("Parabéns! Você alcançou uma nova pontuação máxima!", 22, WHITE, WIDTH/2, HEIGHT/5 - 40)
@@ -158,6 +161,7 @@ class Game:
                 f.write(str(self.score))
         else:
             self.draw_text("Recorde: " +str(self.highscore), 22, YELLOW, WIDTH/2, HEIGHT/6 - 40)
+        '''
         self.draw_text("Aperte qualquer tecla para jogar novamente", 22, BLACK, WIDTH/2, 3*HEIGHT/4)
         pg.display.flip()
         self.wait_for_key()
