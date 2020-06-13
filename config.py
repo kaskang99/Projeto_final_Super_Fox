@@ -7,7 +7,6 @@ FONT = 'arial'
 SPRITESHEET = 'spritesheet_jumper.png'
 FOX_SPRITE = 'fox_spritesheet.png'
 HS_FILE = "highscore.txt"
-CLOUD_SPRITE = "items_spritesheet.png"
 # player properties
 PLAYER_ACC = 0.5
 PLAYER_FRICTION = -0.12
@@ -37,6 +36,8 @@ MOB_LIST = [(1400, HEIGHT -100),
             (2350, HEIGHT -280),
             (3400, HEIGHT -100),
             (4100, HEIGHT -450),]
+
+
 
 # cores
 WHITE = (255,255,255)

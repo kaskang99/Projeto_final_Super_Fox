@@ -34,7 +34,6 @@ class Game:
         #load spritesheet image
         self.fox_sprite = Spritesheet(path.join(img_dir, FOX_SPRITE))    
         self.spritesheet = Spritesheet(path.join(img_dir, SPRITESHEET))
-        self.cloud = Spritesheet(path.join(img_dir, CLOUD_SPRITE))
         #load sounds
         self.snd_dir = path.join(self.dir, 'snd')
         self.jump_sound = pg.mixer.Sound(path.join(self.snd_dir, 'fox_jump.wav'))
@@ -43,6 +42,7 @@ class Game:
     def new(self):
         # start a new game
         self.score = 0
+        self.assets = load_assets()
         self.all_sprites = pg.sprite.Group()
         self.platforms = pg.sprite.Group()
         self.mobes = pg.sprite.Group()
@@ -56,6 +56,7 @@ class Game:
             m = Mob(self, *mobs)
             self.all_sprites.add(m)
             self.mobes.add(m)
+
         self.run()
 
     def run(self):
@@ -115,7 +116,8 @@ class Game:
 
     def draw(self):
         # Game loop - draw
-        self.window.fill(SKYBLUE)
+        self.window.fill(BLACK)
+        self.window.blit(self.assets[background], (0,0))
         self.all_sprites.draw(self.window)
         self.draw_text(str(self.score), 22, WHITE, WIDTH/2, 15)
         # after drawing everything, flip the display
