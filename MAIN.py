@@ -26,11 +26,13 @@ class Game:
         img_dir = path.join(self.dir, 'SpriteSheets')
         # load hi-score
         self.dir = path.dirname(__file__)
+        '''
         with open(path.join(self.dir, 'HS_FILE'), 'w') as f:
             try:
                 self.highscore = int(f.read())
             except:
                 self.highscore = 0
+        ''' 
         #load spritesheet image
         self.fox_sprite = Spritesheet(path.join(img_dir, FOX_SPRITE))    
         self.spritesheet = Spritesheet(path.join(img_dir, SPRITESHEET))
@@ -136,7 +138,7 @@ class Game:
         self.draw_text(TITLE, 48, BLACK, WIDTH/2, HEIGHT/4)
         self.draw_text("arrows to move, space to jump", 22, BLACK, WIDTH/2, HEIGHT/2)
         self.draw_text("Aperte qualquer tecla para começar", 22, BLACK, WIDTH/2, 3*HEIGHT/4)
-        self.draw_text("Recorde: " +str(self.highscore), 22, YELLOW, WIDTH/2, 15)
+        #self.draw_text("Recorde: " +str(self.highscore), 22, YELLOW, WIDTH/2, 15)
         pg.display.flip()
         self.wait_for_key()
         pg.mixer.music.fadeout(750)
