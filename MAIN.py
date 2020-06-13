@@ -88,18 +88,21 @@ class Game:
                 plat.rect.left -= max(abs(self.player.vel.x),2)
             for mobs in self.mobes:
                 mobs.rect.left -= max(abs(self.player.vel.x),2)
-        """elif self.player.rect.left < WIDTH / 4:
+        elif self.player.rect.left < WIDTH / 4:
             self.player.pos.x += max(abs(self.player.vel.x),2)
             for plat in self.platforms:
                 plat.rect.left += max(abs(self.player.vel.x),2)
             for mobs in self.mobes:
                 mobs.rect.left += max(abs(self.player.vel.x),2)
-        """
         #jogador "cai" em um buraco e morre
         if self.player.rect.bottom > HEIGHT:
             self.playing = False
             self.gameover_sound.play()
             self.gameover_sound.set_volume(.2)
+        hits_mob = pg.sprite.spritecollide(self.player, self.mobes, False)
+        if hits_mob:
+            self.playing = False
+            self.show_go_screen = True
 
     def events(self):
         # Game loop - events

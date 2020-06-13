@@ -1,7 +1,12 @@
 # Sprite classes for game
 from config import *
 import pygame as pg
+from os import path
+from random import choices
 vec = pg.math.Vector2
+
+dir = path.dirname(__file__)
+mob_dir = path.join(dir, 'assets')
 
 class Player(pg.sprite.Sprite):
     def __init__(self, game): #no arquivo MAIN.py - self.player = Player(self) - o init precisa de mais de 1 argumento, já que não é mais Player() e sim Player(self)
@@ -122,8 +127,8 @@ class Mob(pg.sprite.Sprite):
     def __init__(self, game, x, y):
         pg.sprite.Sprite.__init__(self)
         self.game = game
-        self.image = pg.Surface((30,40))
-        self.image.fill(RED)
+        images = pg.image.load(path.join(mob_dir, 'lion_dir.png'))
+        self.image = images
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y 
