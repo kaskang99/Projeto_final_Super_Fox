@@ -100,7 +100,8 @@ class Game:
         hits_mob = pg.sprite.spritecollide(self.player, self.mobes, False)
         if hits_mob:
             self.playing = False
-            self.show_go_screen = True
+            self.gameover_sound.play()
+            self.gameover_sound.set_volume(.2)
 
     def events(self):
         # Game loop - events
