@@ -114,6 +114,7 @@ class Spritesheet:
     #utility class for loading and parsing spritesheets
     def __init__(self, filename):
         self.spritesheet = pg.image.load(filename).convert()
+        #self.cloud_spritesheet = pg.image.load(filename).convert()
 
     def get_image(self, x, y, w, h):
         # grab an image out of a larger spritesheet
@@ -122,15 +123,6 @@ class Spritesheet:
         image = pg.transform.scale(image, ((3*w)//4, (3*h)//4)) #resize image
         return image
         
-class Cloud:
-    def __init__(self, game, x, y, filename):
-        pg.sprite.Sprite.__init__
-        self.sprite = pg.image.load(filename).convert()
-
-    def get_image(self,x,y):
-        cloud = pg.Surface((w,h))
-        image.blit(self.sprite, ())
-
 class Mob(pg.sprite.Sprite):
     def __init__(self, game, x, y):
         pg.sprite.Sprite.__init__(self)
