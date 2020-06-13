@@ -17,6 +17,9 @@ class Player(pg.sprite.Sprite):
         self.current_frame = 0
         self.last_update = 0
         self.load_images()
+        self.dir = path.dirname(__file__)
+        self.snd_dir = path.join(self.dir, 'snd')
+        self.jump_sound = pg.mixer.Sound(path.join(self.snd_dir, 'fox_jump.wav'))
         self.image = self.standing_frame[0]
         self.image.set_colorkey(PLAYER_GREEN)
         self.rect = self.image.get_rect()
@@ -40,13 +43,14 @@ class Player(pg.sprite.Sprite):
         self.jump_frame = self.game.fox_sprite.get_image(229, 0, 38, 40)
         self.jump_frame.set_colorkey(PLAYER_GREEN)
 
-    def jump(self):
+    def jump(self):        
         #pular somente se estiver em uma plataforma ou estiver no chao
         self.rect.x += 1 #adicionei um pixel para o retângulo do jogador (verificar se tem ou não uma plataforma)
         hits = pg.sprite.spritecollide(self, self.game.platforms, False)
         self.rect.x -= 1 #retirei o pixel de verificação
         if hits:
             self.vel.y = -PLAYER_JUMP
+            self.jump_sound.play()
 
     def update(self):
         self.animate()

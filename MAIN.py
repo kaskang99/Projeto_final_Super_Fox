@@ -38,7 +38,6 @@ class Game:
         self.spritesheet = Spritesheet(path.join(img_dir, SPRITESHEET))
         #load sounds
         self.snd_dir = path.join(self.dir, 'snd')
-        self.jump_sound = pg.mixer.Sound(path.join(self.snd_dir, 'fox_jump.wav'))
         self.gameover_sound = pg.mixer.Sound(path.join(self.snd_dir, 'game_over.wav'))
 
     def new(self):
@@ -120,7 +119,7 @@ class Game:
             if event.type == pg.KEYDOWN:
                 if event.key == pg.K_SPACE:
                     self.player.jump()
-                    self.jump_sound.play()
+
 
     def draw(self):
         # Game loop - draw
