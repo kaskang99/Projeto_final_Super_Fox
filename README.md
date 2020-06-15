@@ -1,7 +1,12 @@
 # Projeto_final_Super_Fox
+Criadores:
+    Bruno Boldrim Saboya
+    Lucas Kang
+    Murilo Prado Weyne
+
 The game was developed as a final assignment for a class called Software Design.
 
-Objetivo:
+Objetivo do projeto:
 	Desenvolver um jogo de computador em Python 3 usando recursos da biblioteca PyGame.
 	
     O jogo deverá ser interativo:
@@ -12,7 +17,10 @@ Objetivo:
 	
     O tema do jogo é livre, contudo, a proposta deve ser previamente discutida com o professor.
 
-Descrição:
+Descrição do jogo:
+    O jogo foi inspirado pelas teorias Nihilistas, aonde nada na vida tem sentido ou propósito.
+    Todos os esforços para completar a fase são em vão, e mesmo após a morte, o highscore não é armazenado em uma tentativa de ilustrar a triste realidade que vivemos.
+    Toda decisão tomada se torna passado, ou seja, não tem como voltar para trás.
 
 Como instalar as bibliotecas utilizadas:
 	
