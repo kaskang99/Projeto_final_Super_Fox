@@ -40,7 +40,7 @@ MOB_LIST = [(1400, HEIGHT -100),
             (4100, HEIGHT -450),
             (4550, HEIGHT -100),]
 
-FLAG_LIST = [(5000, HEIGHT -100),]
+FLAG_LIST = [(5450, HEIGHT -130),]
 
 
 # cores

@@ -94,6 +94,8 @@ class Game:
                 plat.rect.left -= max(abs(self.player.vel.x),2)
             for mobs in self.mobes:
                 mobs.rect.left -= max(abs(self.player.vel.x),2)
+            for fla in self.flags:
+                fla.rect.left -= max(abs(self.player.vel.x), 2)
         elif self.player.rect.left < WIDTH / 4:
             self.player.pos.x += max(abs(self.player.vel.x),2)
             for plat in self.platforms:
