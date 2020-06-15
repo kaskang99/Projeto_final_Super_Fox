@@ -7,6 +7,9 @@ Criadores:
 RODAR ARQUIVO:
     MAIN.py
 
+Vídeo do jogo rodando:
+https://www.youtube.com/watch?v=dRAPQ9eIPGY
+
 The game was developed as a final assignment for a class called Software Design.
 
 Objetivo do projeto:
