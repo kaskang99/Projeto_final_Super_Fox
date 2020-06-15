@@ -26,13 +26,7 @@ class Game:
         img_dir = path.join(self.dir, 'SpriteSheets')
         # load hi-score
         self.dir = path.dirname(__file__)
-        '''
-        with open(path.join(self.dir, 'HS_FILE'), 'w') as f:
-            try:
-                self.highscore = int(f.read())
-            except:
-                self.highscore = 0
-        ''' 
+        
         #load spritesheet image
         self.fox_sprite = Spritesheet(path.join(img_dir, FOX_SPRITE))    
         self.spritesheet = Spritesheet(path.join(img_dir, SPRITESHEET))

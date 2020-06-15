@@ -118,12 +118,12 @@ class Platform(pg.sprite.Sprite):
 class Spritesheet:
     #utility class for loading and parsing spritesheets
     def __init__(self, filename):
-        self.spritesheet = pg.image.load(filename).convert()
+        self.spritesheet = pg.image.load(filename).convert_alpha()
         #self.cloud_spritesheet = pg.image.load(filename).convert()
 
     def get_image(self, x, y, w, h):
         # grab an image out of a larger spritesheet
-        image = pg.Surface((w,h))
+        image = pg.Surface((w,h),pg.SRCALPHA)
         image.blit(self.spritesheet, (0, 0), (x, y, w, h))
         image = pg.transform.scale(image, ((3*w)//4, (3*h)//4)) #resize image
         return image
