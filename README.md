@@ -4,7 +4,7 @@ Criadores:
     Lucas Kang
     Murilo Prado Weyne
 
-RODAR ARQUIVO:
+EXECUTAR O ARQUIVO:
     MAIN.py
 
 Vídeo do jogo rodando:
