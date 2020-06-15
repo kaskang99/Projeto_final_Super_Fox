@@ -3,6 +3,7 @@ from config import *
 import pygame as pg
 from os import path
 from random import choices
+from assets import *
 vec = pg.math.Vector2
 
 dir = path.dirname(__file__)
@@ -117,12 +118,12 @@ class Platform(pg.sprite.Sprite):
 class Spritesheet:
     #utility class for loading and parsing spritesheets
     def __init__(self, filename):
-        self.spritesheet = pg.image.load(filename).convert()
+        self.spritesheet = pg.image.load(filename).convert_alpha()
         #self.cloud_spritesheet = pg.image.load(filename).convert()
 
     def get_image(self, x, y, w, h):
         # grab an image out of a larger spritesheet
-        image = pg.Surface((w,h))
+        image = pg.Surface((w,h),pg.SRCALPHA)
         image.blit(self.spritesheet, (0, 0), (x, y, w, h))
         image = pg.transform.scale(image, ((3*w)//4, (3*h)//4)) #resize image
         return image
@@ -136,3 +137,13 @@ class Mob(pg.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y 
+
+class Flag(pg.sprite.Sprite):
+    def __init__(self, game, x, y):
+        pg.sprite.Sprite.__init__(self)
+        self.game = game
+        images = pg.image.load(path.join(mob_dir, 'flagRed.png'))
+        self.image = images
+        self.rect = self.image.get_rect()
+        self.rect.x = x
+        self.rect.y = y

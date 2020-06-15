@@ -26,13 +26,7 @@ class Game:
         img_dir = path.join(self.dir, 'SpriteSheets')
         # load hi-score
         self.dir = path.dirname(__file__)
-        '''
-        with open(path.join(self.dir, 'HS_FILE'), 'w') as f:
-            try:
-                self.highscore = int(f.read())
-            except:
-                self.highscore = 0
-        ''' 
+        
         #load spritesheet image
         self.fox_sprite = Spritesheet(path.join(img_dir, FOX_SPRITE))    
         self.spritesheet = Spritesheet(path.join(img_dir, SPRITESHEET))
@@ -47,6 +41,7 @@ class Game:
         self.all_sprites = pg.sprite.Group()
         self.platforms = pg.sprite.Group()
         self.mobes = pg.sprite.Group()
+        self.flags = pg.sprite.Group()
         self.player = Player(self) #da uma referencia para o jogo (um link para o jogo, mostra todas as variáveis do jogo e.g.: plataforma)
         self.all_sprites.add(self.player)
         for plat in PLATFORM_LIST:
@@ -57,6 +52,10 @@ class Game:
             m = Mob(self, *mobs)
             self.all_sprites.add(m)
             self.mobes.add(m)
+        for fla in FLAG_LIST:
+            f = Flag(self, *fla)
+            self.all_sprites.add(f)
+            self.flags.add(f)
 
         self.run()
 
@@ -89,6 +88,8 @@ class Game:
                 plat.rect.left -= max(abs(self.player.vel.x),2)
             for mobs in self.mobes:
                 mobs.rect.left -= max(abs(self.player.vel.x),2)
+            for fla in self.flags:
+                fla.rect.left -= max(abs(self.player.vel.x), 2)
         elif self.player.rect.left < WIDTH / 4:
             self.player.pos.x += max(abs(self.player.vel.x),2)
             for plat in self.platforms:
@@ -103,6 +104,12 @@ class Game:
             pg.mixer.music.fadeout(750)
         hits_mob = pg.sprite.spritecollide(self.player, self.mobes, False)
         if hits_mob:
+            self.playing = False
+            self.gameover_sound.play()
+            self.gameover_sound.set_volume(.2)
+            pg.mixer.music.fadeout(750)
+        hits_flag = pg.sprite.spritecollide(self.player, self.flags, False)
+        if hits_flag:
             self.playing = False
             self.gameover_sound.play()
             self.gameover_sound.set_volume(.2)
