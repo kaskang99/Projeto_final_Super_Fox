@@ -26,23 +26,24 @@ class Game:
         img_dir = path.join(self.dir, 'SpriteSheets')
         # load hi-score
         self.dir = path.dirname(__file__)
+        '''
         with open(path.join(self.dir, 'HS_FILE'), 'w') as f:
             try:
                 self.highscore = int(f.read())
             except:
                 self.highscore = 0
+        ''' 
         #load spritesheet image
         self.fox_sprite = Spritesheet(path.join(img_dir, FOX_SPRITE))    
         self.spritesheet = Spritesheet(path.join(img_dir, SPRITESHEET))
-        self.cloud = Spritesheet(path.join(img_dir, CLOUD_SPRITE))
         #load sounds
         self.snd_dir = path.join(self.dir, 'snd')
-        self.jump_sound = pg.mixer.Sound(path.join(self.snd_dir, 'fox_jump.wav'))
         self.gameover_sound = pg.mixer.Sound(path.join(self.snd_dir, 'game_over.wav'))
 
     def new(self):
         # start a new game
         self.score = 0
+        self.assets = load_assets()
         self.all_sprites = pg.sprite.Group()
         self.platforms = pg.sprite.Group()
         self.mobes = pg.sprite.Group()
@@ -56,6 +57,7 @@ class Game:
             m = Mob(self, *mobs)
             self.all_sprites.add(m)
             self.mobes.add(m)
+
         self.run()
 
     def run(self):
@@ -87,18 +89,24 @@ class Game:
                 plat.rect.left -= max(abs(self.player.vel.x),2)
             for mobs in self.mobes:
                 mobs.rect.left -= max(abs(self.player.vel.x),2)
-        """elif self.player.rect.left < WIDTH / 4:
+        elif self.player.rect.left < WIDTH / 4:
             self.player.pos.x += max(abs(self.player.vel.x),2)
             for plat in self.platforms:
                 plat.rect.left += max(abs(self.player.vel.x),2)
             for mobs in self.mobes:
                 mobs.rect.left += max(abs(self.player.vel.x),2)
-        """
         #jogador "cai" em um buraco e morre
         if self.player.rect.bottom > HEIGHT:
             self.playing = False
             self.gameover_sound.play()
             self.gameover_sound.set_volume(.2)
+            pg.mixer.music.fadeout(750)
+        hits_mob = pg.sprite.spritecollide(self.player, self.mobes, False)
+        if hits_mob:
+            self.playing = False
+            self.gameover_sound.play()
+            self.gameover_sound.set_volume(.2)
+            pg.mixer.music.fadeout(750)
 
     def events(self):
         # Game loop - events
@@ -111,11 +119,12 @@ class Game:
             if event.type == pg.KEYDOWN:
                 if event.key == pg.K_SPACE:
                     self.player.jump()
-                    self.jump_sound.play()
+
 
     def draw(self):
         # Game loop - draw
-        self.window.fill(SKYBLUE)
+        self.window.fill(BLACK)
+        self.window.blit(self.assets[background], (0,0))
         self.all_sprites.draw(self.window)
         self.draw_text(str(self.score), 22, WHITE, WIDTH/2, 15)
         # after drawing everything, flip the display
@@ -130,7 +139,7 @@ class Game:
         self.draw_text(TITLE, 48, BLACK, WIDTH/2, HEIGHT/4)
         self.draw_text("arrows to move, space to jump", 22, BLACK, WIDTH/2, HEIGHT/2)
         self.draw_text("Aperte qualquer tecla para começar", 22, BLACK, WIDTH/2, 3*HEIGHT/4)
-        self.draw_text("Recorde: " +str(self.highscore), 22, YELLOW, WIDTH/2, 15)
+        #self.draw_text("Recorde: " +str(self.highscore), 22, YELLOW, WIDTH/2, 15)
         pg.display.flip()
         self.wait_for_key()
         pg.mixer.music.fadeout(750)
@@ -143,6 +152,7 @@ class Game:
         self.draw_text("GAME OVER", 48, BLACK, WIDTH/2, HEIGHT/2)
         self.draw_text("Pontuação: " +str(self.score), 22, WHITE, WIDTH/2, HEIGHT/5)
         self.draw_text("Aperte qualquer tecla para jogar novamente", 22, BLACK, WIDTH/2, 3*HEIGHT/4)
+        '''
         if self.score > self.highscore:
             self.highscore = self.score
             self.draw_text("Parabéns! Você alcançou uma nova pontuação máxima!", 22, WHITE, WIDTH/2, HEIGHT/5 - 40)
@@ -150,6 +160,7 @@ class Game:
                 f.write(str(self.score))
         else:
             self.draw_text("Recorde: " +str(self.highscore), 22, YELLOW, WIDTH/2, HEIGHT/6 - 40)
+        '''
         self.draw_text("Aperte qualquer tecla para jogar novamente", 22, BLACK, WIDTH/2, 3*HEIGHT/4)
         pg.display.flip()
         self.wait_for_key()

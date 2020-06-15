@@ -1,7 +1,12 @@
 # Sprite classes for game
 from config import *
 import pygame as pg
+from os import path
+from random import choices
 vec = pg.math.Vector2
+
+dir = path.dirname(__file__)
+mob_dir = path.join(dir, 'assets')
 
 class Player(pg.sprite.Sprite):
     def __init__(self, game): #no arquivo MAIN.py - self.player = Player(self) - o init precisa de mais de 1 argumento, já que não é mais Player() e sim Player(self)
@@ -12,6 +17,9 @@ class Player(pg.sprite.Sprite):
         self.current_frame = 0
         self.last_update = 0
         self.load_images()
+        self.dir = path.dirname(__file__)
+        self.snd_dir = path.join(self.dir, 'snd')
+        self.jump_sound = pg.mixer.Sound(path.join(self.snd_dir, 'fox_jump.wav'))
         self.image = self.standing_frame[0]
         self.image.set_colorkey(PLAYER_GREEN)
         self.rect = self.image.get_rect()
@@ -35,13 +43,14 @@ class Player(pg.sprite.Sprite):
         self.jump_frame = self.game.fox_sprite.get_image(229, 0, 38, 40)
         self.jump_frame.set_colorkey(PLAYER_GREEN)
 
-    def jump(self):
+    def jump(self):        
         #pular somente se estiver em uma plataforma ou estiver no chao
         self.rect.x += 1 #adicionei um pixel para o retângulo do jogador (verificar se tem ou não uma plataforma)
         hits = pg.sprite.spritecollide(self, self.game.platforms, False)
         self.rect.x -= 1 #retirei o pixel de verificação
         if hits:
             self.vel.y = -PLAYER_JUMP
+            self.jump_sound.play()
 
     def update(self):
         self.animate()
@@ -109,6 +118,7 @@ class Spritesheet:
     #utility class for loading and parsing spritesheets
     def __init__(self, filename):
         self.spritesheet = pg.image.load(filename).convert()
+        #self.cloud_spritesheet = pg.image.load(filename).convert()
 
     def get_image(self, x, y, w, h):
         # grab an image out of a larger spritesheet
@@ -117,21 +127,12 @@ class Spritesheet:
         image = pg.transform.scale(image, ((3*w)//4, (3*h)//4)) #resize image
         return image
         
-class Cloud:
-    def __init__(self, game, x, y, filename):
-        pg.sprite.Sprite.__init__
-        self.sprite = pg.image.load(filename).convert()
-
-    def get_image(self,x,y):
-        cloud = pg.Surface((w,h))
-        image.blit(self.sprite, ())
-
 class Mob(pg.sprite.Sprite):
     def __init__(self, game, x, y):
         pg.sprite.Sprite.__init__(self)
         self.game = game
-        self.image = pg.Surface((30,40))
-        self.image.fill(RED)
+        images = pg.image.load(path.join(mob_dir, 'lion_dir.png'))
+        self.image = images
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y 
