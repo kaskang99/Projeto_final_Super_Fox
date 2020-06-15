@@ -3,6 +3,7 @@ from config import *
 import pygame as pg
 from os import path
 from random import choices
+from assets import *
 vec = pg.math.Vector2
 
 dir = path.dirname(__file__)
@@ -136,3 +137,13 @@ class Mob(pg.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y 
+
+class Flag(pg.sprite.Sprite):
+    def __init__(self, game, x, y):
+        pg.sprite.Sprite.__init__(self)
+        self.game = game
+        images = pg.image.load(path.join(mob_dir, 'flagRed.png'))
+        self.image = images
+        self.rect = self.image.get_rect()
+        self.rect.x = x
+        self.rect.y = y

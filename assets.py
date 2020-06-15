@@ -15,6 +15,7 @@ jacare_dir_tras = 'jacare_dir_tras'
 lion_dir = 'lion_dir'
 lion_esq = 'lion_esq'
 background = 'background'
+flag = 'flag'
 
 def load_assets():
     assets = {}
@@ -27,4 +28,5 @@ def load_assets():
     assets[jacare_dir_tras] = pygame.image.load(os.path.join(img_dir, 'jacare_dir_tras.png')).convert()
     assets[lion_dir] = pygame.image.load(os.path.join(img_dir, 'lion_dir.png')).convert()
     assets[lion_esq] = pygame.image.load(os.path.join(img_dir, 'lion_esq.png')).convert()
+    assets[flag] = pygame.image.load(os.path.join(img_dir, 'flagRed.png')).convert()
     return assets

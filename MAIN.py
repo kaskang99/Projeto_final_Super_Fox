@@ -47,6 +47,7 @@ class Game:
         self.all_sprites = pg.sprite.Group()
         self.platforms = pg.sprite.Group()
         self.mobes = pg.sprite.Group()
+        self.flags = pg.sprite.Group()
         self.player = Player(self) #da uma referencia para o jogo (um link para o jogo, mostra todas as variáveis do jogo e.g.: plataforma)
         self.all_sprites.add(self.player)
         for plat in PLATFORM_LIST:
@@ -57,6 +58,10 @@ class Game:
             m = Mob(self, *mobs)
             self.all_sprites.add(m)
             self.mobes.add(m)
+        for fla in FLAG_LIST:
+            f = Flag(self, *fla)
+            self.all_sprites.add(f)
+            self.flags.add(f)
 
         self.run()
 
@@ -103,6 +108,12 @@ class Game:
             pg.mixer.music.fadeout(750)
         hits_mob = pg.sprite.spritecollide(self.player, self.mobes, False)
         if hits_mob:
+            self.playing = False
+            self.gameover_sound.play()
+            self.gameover_sound.set_volume(.2)
+            pg.mixer.music.fadeout(750)
+        hits_flag = pg.sprite.spritecollide(self.player, self.flags, False)
+        if hits_flag:
             self.playing = False
             self.gameover_sound.play()
             self.gameover_sound.set_volume(.2)
