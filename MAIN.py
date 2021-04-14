@@ -68,13 +68,15 @@ class Game:
         while self.playing:
             self.clock.tick(FPS)
             self.events()
-            self.update()
+            self.update_position()
+            self.updade_sound()
             self.draw()
         pg.mixer.music.fadeout(500)
 
-    def update(self):
+    def update_position(self):
         # Game update
         self.all_sprites.update()
+        
         # verifica se o jogador colide com uma plataforma - somente quando estiver caindo
         if self.player.vel.y > 0:
             hits = pg.sprite.spritecollide(self.player, self.platforms, False)
@@ -96,6 +98,8 @@ class Game:
                 plat.rect.left += max(abs(self.player.vel.x),2)
             for mobs in self.mobes:
                 mobs.rect.left += max(abs(self.player.vel.x),2)
+
+    def updade_sound(self):     
         #jogador "cai" em um buraco e morre
         if self.player.rect.bottom > HEIGHT:
             self.playing = False
@@ -158,16 +162,6 @@ class Game:
         self.window.fill(TEAL)
         self.draw_text("GAME OVER", 48, BLACK, WIDTH/2, HEIGHT/2)
         self.draw_text("Pontuação: " +str(self.score), 22, WHITE, WIDTH/2, HEIGHT/5)
-        self.draw_text("Aperte qualquer tecla para jogar novamente", 22, BLACK, WIDTH/2, 3*HEIGHT/4)
-        '''
-        if self.score > self.highscore:
-            self.highscore = self.score
-            self.draw_text("Parabéns! Você alcançou uma nova pontuação máxima!", 22, WHITE, WIDTH/2, HEIGHT/5 - 40)
-            with open(path.join(self.dir, 'HS_FILE'), 'w') as f:
-                f.write(str(self.score))
-        else:
-            self.draw_text("Recorde: " +str(self.highscore), 22, YELLOW, WIDTH/2, HEIGHT/6 - 40)
-        '''
         self.draw_text("Aperte qualquer tecla para jogar novamente", 22, BLACK, WIDTH/2, 3*HEIGHT/4)
         pg.display.flip()
         self.wait_for_key()
