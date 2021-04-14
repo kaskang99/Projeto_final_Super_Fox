@@ -76,7 +76,7 @@ class Game:
     def update_position(self):
         # Game update
         self.all_sprites.update()
-        
+        max_position = max(abs(self.player.vel.x),2)
         # verifica se o jogador colide com uma plataforma - somente quando estiver caindo
         if self.player.vel.y > 0:
             hits = pg.sprite.spritecollide(self.player, self.platforms, False)
@@ -85,19 +85,19 @@ class Game:
                 self.player.vel.y = 0
         #quando o jogador alcançar o terço da tela 
         if self.player.rect.right > WIDTH / 3:
-            self.player.pos.x -= max(abs(self.player.vel.x),2)
+            self.player.pos.x -= max_position
             for plat in self.platforms:
-                plat.rect.left -= max(abs(self.player.vel.x),2)
+                plat.rect.left -= max_position
             for mobs in self.mobes:
-                mobs.rect.left -= max(abs(self.player.vel.x),2)
+                mobs.rect.left -= max_position
             for fla in self.flags:
-                fla.rect.left -= max(abs(self.player.vel.x), 2)
+                fla.rect.left -= max_position
         elif self.player.rect.left < WIDTH / 4:
-            self.player.pos.x += max(abs(self.player.vel.x),2)
+            self.player.pos.x += max_position
             for plat in self.platforms:
-                plat.rect.left += max(abs(self.player.vel.x),2)
+                plat.rect.left += max_position
             for mobs in self.mobes:
-                mobs.rect.left += max(abs(self.player.vel.x),2)
+                mobs.rect.left += max_position
 
     def updade_sound(self):     
         #jogador "cai" em um buraco e morre
